@@ -1,0 +1,30 @@
+/* component/navlist/navlist.wxss */
+.navlist-all{
+  height:100rpx;
+  display: flex;
+  padding: 0 15rpx;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.navlist-group{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navlist-group image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.navlist-group text{
+  margin-left:10rpx;
+  font-size:26rpx;  
+}
+
+.navimg{
+  width: 40rpx;
+  height: 40rpx;
+}

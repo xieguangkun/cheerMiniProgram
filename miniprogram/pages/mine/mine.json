@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "navlist":"/component/navlist/navlist"
+  }
+}

@@ -1,0 +1,33 @@
+/**index.wxss**/
+
+page {
+  background: 	#F8F8FF;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.top-bar{
+  margin-top:20rpx;
+  width: 100%;
+  height: 120rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.send-item{
+  width: 60rpx;
+  height: 120rpx;
+  text-align: center;
+}
+
+.send-item image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.send-item text{
+   margin-top:60rpx; 
+   font-size: 24rpx;
+}

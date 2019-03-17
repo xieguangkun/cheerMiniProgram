@@ -1,0 +1,12 @@
+<!--component/navlist/navlist.wxml-->
+<view class="navlist-all">
+  <view class="navlist-group">
+    <image src='{{iconurl}}'></image>
+    <text>{{navtext}}</text>
+  </view>
+  <navigator>
+    <image class="navimg"
+    src='../../images/icon_next_arrow.png'>
+    </image>
+  </navigator>
+</view>

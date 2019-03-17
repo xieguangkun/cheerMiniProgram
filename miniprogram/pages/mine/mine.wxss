@@ -1,0 +1,36 @@
+/* miniprogram/pages/mine/mine.wxss */
+page {
+  background: 	#F8F8FF;
+}
+
+.user-info{
+  margin-top:50rpx; 
+  padding: 0 50rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-info image{
+  height: 100rpx;
+  width: 100rpx;
+  border-radius:50%; 
+}
+
+.user-info text{
+  margin-left:20rpx;
+  font-size: 26rpx;  
+}
+
+.nav-center{
+  padding: 0 50rpx;
+  margin-top:50rpx; 
+  border-radius:50rpx; 
+}
+
+.nav-bottom{
+  padding: 0 50rpx;
+  margin-top:50rpx; 
+  border-radius:50rpx;  
+}

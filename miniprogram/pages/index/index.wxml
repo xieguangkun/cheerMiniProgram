@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<view class="container">
+  <scroll-view>
+    <view class="top-bar">
+    <view class="send-item" wx:for="{{showlist}}">
+      <navigator url='../send/send?type={{item.type}}'>
+        <image src='{{item.imgurl}}'></image>
+        <text>{{item.text}}</text>
+      </navigator>
+    </view>
+    </view>
+    <view wx:for="{{products}}">
+      <shareItem username="{{item.username}}" favnum="{{item.favnum}}" avatar="{{item.avatar}}" imglist="{{item.imglist}}" isfav="{{item.isfav}}" looked="{{item.looked}}" text="{{item.text}}" date="{{item.interval}}"></shareItem>
+    </view>
+  </scroll-view>
+</view>

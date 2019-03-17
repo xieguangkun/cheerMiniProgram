@@ -1,0 +1,38 @@
+<!--miniprogram/component/shareItem/shareItem.wxml-->
+<view class="share-item">
+  <view class="share-top">
+    <image src="{{avatar}}"></image>
+    <view class="share-top-show">
+      <view class="username">{{username}}</view>
+      <view class="userdate">{{date}}</view>
+    </view>
+  </view>
+  <view class="share-text">{{text}}</view>
+    <view class="share-photos" >
+      <image bindtap='imgYu' wx:for="{{imglist}}" data-src='{{item}}' src='{{item}}' ></image>
+    </view>
+  <view class="share-imp">
+    <view class="share-look">浏览837次</view>
+    <view class="share-intr">
+    <image bindtap='change' wx:if="{{isFav}}" src = "../../images/fav_select.png"></image>
+      <image bindtap='change' wx:else  src = "../../images/fav.png"></image>
+      
+      <image src = "../../images/star.png" bindtap='imgYu'></image>
+    </view>
+  </view>
+  <view class="line"></view>
+  <view class="love-items">
+    <image src="../../images/love.png"></image>
+    <text>{{favnum}}人觉得很赞</text>
+  </view>
+  <view class="comments">
+    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
+    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
+    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
+    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
+    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
+    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
+    <view class="more">查看所有12条评论</view>
+  </view>
+  <view class="reply"></view>
+</view>

@@ -1,0 +1,19 @@
+<!--miniprogram/pages/mine/mine.wxml-->
+<view class="page">
+<scroll-view>
+  <view class="user-info">
+    <image src="{{userInfo.avatarUrl}}"></image>
+    <text>{{userInfo.nickName}}</text>
+  </view>
+  <view class="nav-center">
+    <navlist wx:for="{{naglist}}"
+    iconurl="{{item.imgurl}}"
+    navtext="{{item.text}}"></navlist>
+  </view>
+  <view class="nav-bottom">
+    <navlist wx:for="{{nag2list}}"
+    iconurl="{{item.imgurl}}"
+    navtext="{{item.text}}"></navlist>
+  </view>
+</scroll-view>
+</view>
