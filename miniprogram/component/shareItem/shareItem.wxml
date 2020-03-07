@@ -1,5 +1,6 @@
 <!--miniprogram/component/shareItem/shareItem.wxml-->
 <view class="share-item">
+<view bindtap='navigator'>
   <view class="share-top">
     <image src="{{avatar}}"></image>
     <view class="share-top-show">
@@ -8,16 +9,16 @@
     </view>
   </view>
   <view class="share-text">{{text}}</view>
-    <view class="share-photos" >
-      <image bindtap='imgYu' wx:for="{{imglist}}" data-src='{{item}}' src='{{item}}' ></image>
-    </view>
+  <view class="share-photos" >
+    <image catchtap='imgYu' wx:for="{{imglist}}" data-src='{{item}}' src='{{item}}' ></image>
+  </view>
   <view class="share-imp">
     <view class="share-look">浏览837次</view>
     <view class="share-intr">
-    <image bindtap='change' wx:if="{{isFav}}" src = "../../images/fav_select.png"></image>
-      <image bindtap='change' wx:else  src = "../../images/fav.png"></image>
+      <image catchtap='change'data-id="{{_id}}" wx:if="{{isFav}}" src ="../../images/fav_select.png"></image>
+      <image catchtap='change' wx:else  src = "../../images/fav.png"></image>
       
-      <image src = "../../images/star.png" bindtap='imgYu'></image>
+      <image src = "../../images/star.png" catchtap='showInputBox'></image>
     </view>
   </view>
   <view class="line"></view>
@@ -25,14 +26,21 @@
     <image src="../../images/love.png"></image>
     <text>{{favnum}}人觉得很赞</text>
   </view>
-  <view class="comments">
-    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
-    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
-    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
-    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
-    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
-    <view class="commentview"><span>王萌:</span>好棒好棒!</view>
-    <view class="more">查看所有12条评论</view>
   </view>
-  <view class="reply"></view>
+  <view class="comments" wx:for="{{comments}}" >
+    <view bindlongpress='deleter' class="commentview" data-id='{{item._id}}' data-open='{{item._openid}}' >
+        <span>{{item.commuser}}:</span>{{item.comment}}
+    </view>     
+  </view>
+  
+  <!-- 评论框 -->
+      <view class='model' wx:if="{{inputBoxShow}}">
+        <!-- invisible_model view 用于点击隐藏model评论框 -->
+        <view class='invisible_model' catchtap='invisible'></view>
+        <view class='input-box'>
+          <textarea class="textarea" bindinput='setText' placeholder="请输入你的看法" cursor-spacing="{{65}}" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-focus="{{true}}" />
+          <text class='send' bindtap='send'>发送</text>
+        </view>
+      </view>
+      
 </view>

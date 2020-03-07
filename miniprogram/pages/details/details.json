@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "commItem": "/component/commItem/commItem"
+  }
+}

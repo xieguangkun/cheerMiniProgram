@@ -2,14 +2,16 @@
   "pages": [
     "pages/index/index",
     "pages/mine/mine",
-    "pages/send/send"
+    "pages/send/send",
+    "pages/details/details"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "倾尔树洞",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "list": [

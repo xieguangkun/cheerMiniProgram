@@ -1,0 +1,46 @@
+<!--miniprogram/pages/details/details.wxml--> 
+<view class="detail-all"> 
+<scroll-view scroll-y="{{isScroll}}"> 
+  <view class="detail-top"> 
+    <image src="{{avatar}}"></image> 
+    <view class="detail-top-show"> 
+      <view class="username">{{username}}</view> 
+      <view class="userdate">{{date}}</view> 
+    </view> 
+  </view> 
+ 
+  <view class="detail-text">{{text}}</view> 
+  <view class="detail-photos" wx:for='{{imglist}}'> 
+    <image src="{{item}}" bindtap='imgYu'></image> 
+  </view> 
+  <view class="detail-imp"> 
+    <view class="detail-look">浏览837次</view> 
+    <view class="detail-intr"> 
+      <image bindtap='change' wx:if="{{isFav}}" src ="../../images/fav_select.png"></image> 
+      <image bindtap='change' wx:else  src = "../../images/fav.png"></image> 
+       
+      <image src = "../../images/star.png" bindtap='showInputBox'></image> 
+    </view> 
+  </view> 
+  <view class="line"></view> 
+  <view class="loving-items"> 
+    <image src="../../images/love.png"></image> 
+    <text>{{favnum}}人觉得很赞</text> 
+  </view> 
+  <view class="detail-divide"></view> 
+  <view class="detail-comm" wx:for="{{comments}}" > 
+    <commItem  data-id='{{item._id}}' data-open='{{item._openid}}' bindlongpress='deleter' username="{{item.commuser}}" useravartal="{{item.commavatar}}" _id="{{item._id}}" comment="{{item.comment}}" createtime="{{item.interval}}" ></commItem> 
+  </view> 
+ 
+  <!-- 评论框 --> 
+      <view class='model' wx:if="{{inputBoxShow}}"> 
+        <!-- invisible_model view 用于点击隐藏model评论框 --> 
+        <view class='invisible_model' catchtap='invisible'></view> 
+        <view class='input-box'> 
+          <textarea class="textarea" placeholder="请输入你的看法" cursor-spacing="{{65}}" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-focus="{{true}}" bindinput='setText' /> 
+          <text class='send' bindtap='send'>发送</text> 
+        </view> 
+      </view> 
+   
+  </scroll-view> 
+</view>

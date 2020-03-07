@@ -1,0 +1,10 @@
+<!--component/commItem/commItem.wxml--> 
+<view class="comm-top"> 
+  <image src="{{useravartal}}"></image> 
+  <view class="comm-top-show"> 
+    <view class="comm-username">{{username}}</view> 
+    <view class="comm-userdate">{{createtime}}</view> 
+    <view class="comment">{{comment}}</view> 
+  </view> 
+</view> 
+<view class="comm-line"></view> 

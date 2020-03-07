@@ -1,6 +1,6 @@
 <!--index.wxml-->
-<view class="container">
-  <scroll-view>
+<view class="container" wx:if="{{canIUse}}">
+  <scroll-view scroll-y="{{isScroll}}">
     <view class="top-bar">
     <view class="send-item" wx:for="{{showlist}}">
       <navigator url='../send/send?type={{item.type}}'>
@@ -10,7 +10,16 @@
     </view>
     </view>
     <view wx:for="{{products}}">
-      <shareItem username="{{item.username}}" favnum="{{item.favnum}}" avatar="{{item.avatar}}" imglist="{{item.imglist}}" isfav="{{item.isfav}}" looked="{{item.looked}}" text="{{item.text}}" date="{{item.interval}}"></shareItem>
+      <shareItem id="{{item.shortid}}" username="{{item.username}}" favnum="{{item.favnum}}" avatar="{{item.avatar}}" imglist="{{item.imglist}}"  looked="{{item.looked}}" text="{{item.text}}" date="{{item.interval}}" _id="{{item._id}}" commuser="{{nickName}}" commavartal="{{avatarUrl}}" arr="{{arr}}" ></shareItem>
     </view>
+     
+      
+    
   </scroll-view>
+</view>
+
+<view class="all" wx:else>
+<button type='warn' open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo"  class='getInfo'>
+  获取信息
+</button>
 </view>

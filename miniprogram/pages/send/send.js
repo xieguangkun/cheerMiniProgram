@@ -10,10 +10,8 @@ Page({
    */
   data: {
     src: [],
-    userInfo: {
-      avatarUrl: "",//用户头像
-      nickName: "",//用户昵称
-    },
+    avatarUrl: "",//用户头像
+    nickName: "",//用户昵称
     title:"",
     texts:"",
     type:"",
@@ -26,31 +24,43 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    this.setData({
+    that.setData({
       type:options.type
     }),
-      wx.getSetting({
-        success(res) {
-          if (res.authSetting['scope.userInfo']) {
-            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-            wx.getUserInfo({
-              success(res) {
-                var avatarUrl = 'userInfo.avatarUrl';
-                var nickName = 'userInfo.nickName';
-                that.setData({
-                  [avatarUrl]: res.userInfo.avatarUrl,
-                  [nickName]: res.userInfo.nickName,
-                })
-              }
-            })
-          }
-        }
-      })
-    
-    that.setData({
-      create_time: new Date().getTime()
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        console.log("send界面获取缓存", res)
+        that.setData({
+          avatarUrl: res.data.userInfo.avatarUrl,
+          nickName: res.data.userInfo.nickName
+        })
+      },
     })
-  },
+      // wx.getSetting({
+      //   success(res) {
+      //     if (res.authSetting['scope.userInfo']) {
+      //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称 
+      //       wx.getUserInfo({
+      //         success(res) {
+      //           console.log(res);
+      //           var avatarUrl = 'userInfo.avatarUrl';
+      //           var nickName = 'userInfo.nickName';
+      //           that.setData({
+      //             [avatarUrl]: res.userInfo.avatarUrl,
+      //             [nickName]: res.userInfo.nickName,
+      //           })
+      //         }
+      //       })
+      //     }
+      //   }
+      // }),
+      that.setData({
+        create_time: new Date().getTime()
+      })
+        },
+    
+    
 
   gotoShow: function () {
     var _this = this
@@ -105,8 +115,8 @@ Page({
     
     db.collection('userShare').add({
       data:{
-      username: that.data.userInfo.nickName,
-      avatar: that.data.userInfo.avatarUrl,
+      username: that.data.nickName,
+      avatar: that.data.avatarUrl,
       text:that.data.texts,
       imglist:that.data.src,
       type:that.data.type,

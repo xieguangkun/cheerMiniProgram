@@ -2,8 +2,8 @@
 <view class="page">
 <scroll-view>
   <view class="user-info">
-    <image src="{{userInfo.avatarUrl}}"></image>
-    <text>{{userInfo.nickName}}</text>
+    <image src="{{avatarUrl}}"></image>
+    <text>{{nickName}}</text>
   </view>
   <view class="nav-center">
     <navlist wx:for="{{naglist}}"

@@ -1,0 +1,6 @@
+<!--miniprogram/pages/autoscope/autoscope.wxml-->
+<view class="all">
+<button type='warn' open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo"  class='getInfo'>
+  获取信息
+</button>
+</view>
