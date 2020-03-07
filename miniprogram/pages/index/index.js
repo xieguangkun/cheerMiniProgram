@@ -1,242 +1,157 @@
 //index.js
+
 const app = getApp()
 const db = wx.cloud.database()
+const utils = require("../../utils/utils.js")
+const request = require("../../api/request.js")
+const regeneratorRuntime = require('../../miniprogram_npm/miniprogram_npm/regenerator-runtime/index.js')
 Page({
   data: {
+    // 组件所需的参数
+   pagenum:0,
    showlist:[
-     { imgurl: "../../images/send1.png", text: "开心",type:"happy"},
-     { imgurl: "../../images/send2.png" ,text: "难过",type:"sad"},
-     { imgurl: "../../images/send3.png", text: "郁闷", type:"depressed"},
-     { imgurl: "../../images/send4.png" ,text: "酸了",type:"lemon"},
+     { imgurl: '../../images/swiper01.jpg', word: "你要珍惜那个没有安全感但勇敢爱的我", url:"https://mp.weixin.qq.com/s/ZKHScNcuDtyVtaoLMIjgXg"},
+     { imgurl: '../../images/swiper02.jpg', word: "你所不知道的焦虑症", url:"https://mp.weixin.qq.com/s/8PYj6kUzEZdW50eD5K5beA"},
+     { imgurl: '../../images/swiper03.jpg', word: "你眼中的忧郁症世界", url:"https://mp.weixin.qq.com/s/SV1XiAwqnjHxa_8qQpBzSA"}
     ], 
+    isdelete: true,
     avatarUrl: "",//用户头像
     nickName: "",//用户昵称
     arr:[],
     comments:[],
-    observer:0,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     products:[],
     dates:[],
-    inputBoxShow: false,
-    isScroll: true,
+    flag:""
   }, 
   
 
   onLoad: function() {
-    wx.showToast({
-      title: '加载中...',
-      mask: true,
-      icon: 'loading'
+    wx.setNavigationBarTitle({
+      title: '杂话墙',
     })
-    wx.getSetting({
-      success(res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.getUserInfo({
-            success(res) {
-              console.log(res.userInfo)
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#FF6666',
+    })
+    wx.showNavigationBarLoading();
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that = this;
+    var pagenum = 0;
+    var products = [];
+    this.setData({
+      pagenum:pagenum
+    })
+    that.loaddata(products,pagenum);
+    that.loaduserInfo();
+  },
 
-              wx.getSetting({
-                success(res) {
-                  if (res.authSetting['scope.userInfo']) {
-                  // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-                    wx.getUserInfo({
-                    success(res) {
-                      console.log(res.userInfo)
-                      that.setData({
-                        avatarUrl:res.userInfo.avatarUrl,
-                        nickName:res.userInfo.nickName
-                      })
-                      wx.setStorage({
-                        key: 'userinfo',
-                        data: res,
-                      })
-                      }
-                    })
+  navigate:function(){
+    wx.navigateTo({
+      url: '../send/send',
+    })
+  },
+  loaddata(products,pagenum){
+    var that = this;
+    var openid = wx.getStorageSync('openid')
+    request.getAllShare(wx.getStorageSync('openid'), pagenum, res => {
+      var arr = res.data.data
+      arr.forEach(r=>{
+        r.date = utils.getInterval(r.millionSeconds)
+        r.flag = utils.getIconImg("share")
+        if (r.share.openId === openid) {
+          r.candele = true
+        } else {
+          r.candele = false
         }
-      }
+        var imgs = r.share.imgList
+        if(imgs.length>0){
+        imgs.forEach(r=>{
+          var oldimg = r.imgUrl
+          r.imgUrl = app.globalData.filePath+oldimg
+        })
+        r.share.imgList = imgs
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+      })
+      that.setData({
+        products:products.concat(arr)
+      })
     })
-             
+  },
 
+  loaduserInfo(){
+    // 获取用户信息
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          wx.getUserInfo({
+            success: res => {
+              // 可以将 res 发送给后台解码出 unionId
+              wx.setStorageSync('userinfo', res)
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+              console.log(res)
+              app.globalData.userinfo = res;
             }
           })
         }
       }
     })
-    var that = this;
-    that.loaddata();
-    
-    var openid = getApp().openid;
-    db.collection('Like').where({
-      _openid: openid
-    }).get({
-      success(res) {
-        console.log("获取点赞数据", res.data[0].like_arr);
-        var arr = [];
-        var like_arr = res.data[0].like_arr;
-        for (var j in res.data[0].like_arr) {
-          var id = like_arr[j];
-          arr.push({ id });
-        }
-        console.log("启动获得的缓存数据", arr)
-        that.setData({
-          arr:arr
-        })
-      }
-    })
+  },
 
-    
-    // wx.setStorageSync('like', that.data.arr);
-  },
-  loaddata(){
-    var that = this;
-    //监听数据变化的，这是小程序留下来的坑，所以只能这么弄
-    var observer = new Date().getTime();
-    that.setData({
-      observer: observer
-    })
-    //从数据库获取用户发送
-    db.collection('userShare').orderBy('create_time', 'desc').get({
-      success(res) {
-        let data = res.data, arr = [];
-        //改变时间戳的方法，getInterval是计算与当前时间差进行渲染的
-        for (let i = 0; i < data.length; i++) {
-          let interval = that.getInterval(data[i].create_time || (new Date()).getTime());
-          let shortid = "_"+data[i]._id.substring(0, 10);
-          data[i].interval = interval;
-          data[i].shortid = shortid;
-          arr.push(data[i]);
-        }
-        
-        that.setData({
-          products: arr,
-        })
-      }
-    })
-    
-    
-    // var commarr = [];
-    // var favs = [];
-    // var products = that.data.products;
-    // console.log("这就是products", that.data.products);
-    // // for(var i = 0;i<products.length;i++){
-    // db.collection('Comment').where({
-    //   shareid: products._id,
-    // }).limit(6)
-    //   .get({
-    //     success(res) {
-    //       console.log(res.data)
-    //       that.setData({
-    //         comments: res.data
-    //       })
-    //     }
-    //   })
-    // }
-    // var arr = that.properties.arr;
-    // var id = that.properties._id;
-    // for (var i = 0; i < arr.length; i++) {
-    //   if (arr[i].id === id) {
-    //     that.setData({
-    //       isFav: true
-    //     })
-    //   }
-    // }
-    
-    
-  },
   onShow(){
       
   },
-  // 获取time距当前时间的天数或周数
-  getInterval(time){
-    var result;
-    var minute = 1000 * 60;
-    var hour = minute * 60;
-    var day = hour * 24;
-    var halfamonth = day * 15;
-    var month = day * 30;
-    var now = new Date().getTime();
-    var diffValue = now - time;
-    if (diffValue < 0) {
-      return;
-    }
-    var monthC = diffValue / month;
-    var weekC = diffValue / (7 * day);
-    var dayC = diffValue / day;
-    var hourC = diffValue / hour;
-    var minC = diffValue / minute;
-    if (monthC >= 1) {
-      if (monthC <= 12)
-        result = "" + parseInt(monthC) + "月前";
-      else {
-        result = "" + parseInt(monthC / 12) + "年前";
-      }
-    }
-    else if (weekC >= 1) {
-      result = "" + parseInt(weekC) + "周前";
-    }
-    else if (dayC >= 1) {
-      result = "" + parseInt(dayC) + "天前";
-    }
-    else if (hourC >= 1) {
-      result = "" + parseInt(hourC) + "小时前";
-    }
-    else if (minC >= 1) {
-      result = "" + parseInt(minC) + "分钟前";
-    } else {
-      result = "刚刚";
-    }
 
-    return result;
-  },
-  onPullDownRefresh:function(){
-    wx.showNavigationBarLoading();
+  deleteid:function(e){
+    console.log(e.detail)
     var that = this;
-    var openid = getApp().openid;
-    var datas = wx.getStorageSync('like');
-    var arr = [];
-    for (var i in datas) {
-      arr.push(datas[i].id);
-    }
-    db.collection('Like').where({ _openid: openid }).get({
-      success(res) {
-        // console.log("获得内容:", res);
-        if (res.data.length == 0) {
-          db.collection('Like').add({
-            data: {
-              like_arr: arr
-            },
-            success(res) {
-              console.log("缓存添加到数据库成功");
-            }
-          })
-        }
-        if (res.data.length > 0) {
-          if(arr.length>0){
-          wx.cloud.callFunction({
-            name: 'updateLike',
-            data: {
-              openid: openid,
-              arr: arr
-            },
-            success(res) {
-              console.log("成功取值", res)
-            }
-          })
-          }
-        }
+    var products = that.data.products;
+    for(var i = 0;i<products.length;i++){
+      if (products[i].share.id === e.detail) {
+        products.splice(i,1)
       }
+    }
+    that.setData({
+      products:products
     })
-    
-    that.loaddata();
-    // console.log("监听observer",that.data.observer);
-    // var products = that.data.products;
-    // console.log("打印一下products",products);
-    // for(var i = 0;i<products.length;i++){
-    //   that.selectComponent("#" + products[i].shortid).onfresh();
-    // }
-  }
+  },
+  
+  onPullDownRefresh:function(){
+    let openid = getApp().openid;
+    var that = this;
+    var pagenum = 0;
+    var products = [];
+    that.setData({
+      pagenum:0
+    })
+    that.loaddata(products,pagenum);
+  },
 
+  gotofficalcount:function(e){
+    wx.navigateTo({
+      url: '../web/web?url=' + e.target.dataset.url,
+    })
+  },
+
+  onReachBottom:function(){
+    var that = this;
+    var pagenum = that.data.pagenum + 1; //获取当前页数并+1
+    that.setData({
+      pagenum: pagenum, //更新当前页数
+    })
+    that.loaddata(that.data.products,pagenum);
+  }
+  
     
 
   

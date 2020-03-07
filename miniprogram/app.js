@@ -1,8 +1,8 @@
 //app.js
 
 App({
-  onLaunch: function () {
-    
+  
+  onLaunch: function (options) {
     wx.login({
       success(res) {
         console.log(res)
@@ -15,8 +15,6 @@ App({
       }
     })
 
-
-    
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -37,8 +35,21 @@ App({
         console.log('app.js加载', wx.getStorageSync('openid'));
       }
     })
+
+    // 判断是否由分享进入小程序
+    if (options.scene == 1007 || options.scene == 1008) {
+      this.globalData.share = true
+    } else {
+      this.globalData.share = false
+    };
+    // 获取设备顶部窗口的高度（不同设备窗口高度不一样，根据这个来设置自定义导航栏的高度）
+    this.globalData.height = wx.getSystemInfoSync()['statusBarHeight']
+  
+  },
+  globalData: {
+    userinfo: {},//存储用户信息
+    filePath: "https://www.cheerhole.cn:8080/imgs/",//显示图片用的
     
-    this.globalData = {}
   }
   
   

@@ -1,0 +1,10 @@
+/* miniprogram/pages/myhide/myhide.wxss */
+/**index.wxss**/
+
+page {
+  background: 	#663366;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+

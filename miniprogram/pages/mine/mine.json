@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "navlist":"/component/navlist/navlist"
+    "navlist":"/component/navlist/navlist",
+    "topbar": "/component/topbar/topbar"
   }
 }

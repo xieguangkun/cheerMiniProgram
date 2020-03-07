@@ -2,63 +2,42 @@
 
 const app = getApp()
 const db = wx.cloud.database()
-
+const request = require('../../api/request.js')
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     src: [],
     avatarUrl: "",//用户头像
     nickName: "",//用户昵称
-    title:"",
     texts:"",
     type:"",
     create_time:"1970-01-01"
   },
   
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    var that = this;
-    that.setData({
-      type:options.type
-    }),
-    wx.getStorage({
-      key: 'userinfo',
-      success: function (res) {
-        console.log("send界面获取缓存", res)
-        that.setData({
-          avatarUrl: res.data.userInfo.avatarUrl,
-          nickName: res.data.userInfo.nickName
-        })
-      },
+    wx.setNavigationBarTitle({
+      title: '杂话墙发送',
     })
-      // wx.getSetting({
-      //   success(res) {
-      //     if (res.authSetting['scope.userInfo']) {
-      //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称 
-      //       wx.getUserInfo({
-      //         success(res) {
-      //           console.log(res);
-      //           var avatarUrl = 'userInfo.avatarUrl';
-      //           var nickName = 'userInfo.nickName';
-      //           that.setData({
-      //             [avatarUrl]: res.userInfo.avatarUrl,
-      //             [nickName]: res.userInfo.nickName,
-      //           })
-      //         }
-      //       })
-      //     }
-      //   }
-      // }),
-      that.setData({
-        create_time: new Date().getTime()
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#FF6666',
+    })
+    if (!app.globalData.userinfo.userInfo) {
+      wx.redirectTo({
+        url: '../../pages/authorization/authorization?type=share',
       })
-        },
+
+      return;
+    }
+
+    var that = this;
+    var userinfo = app.globalData.userinfo;
+    that.setData({
+      avatarUrl: userinfo.userInfo.avatarUrl,
+      nickName: userinfo.userInfo.nickName
+    })
+    
+  },
     
     
 
@@ -83,11 +62,7 @@ Page({
       }
     })
   },
-  setTitle:function(e){
-    this.setData({
-      title:e.detail.value
-    });
-  },
+  
   setText: function (e) {
     this.setData({
       texts: e.detail.value
@@ -96,15 +71,26 @@ Page({
  
 
   searchBox:function(e){
-    wx.showToast({
+    wx.showLoading({
       title: '上传中...',
-      mask: true,
-      icon: 'loading'
     })
     var that = this;
-    var title = that.data.title;
     var texts = that.data.texts;
-    if(title===""||texts===""){
+    var avatar = that.data.avatarUrl;
+    var nickName = that.data.nickName;
+    var src = that.data.src;
+    var imgArr = "";
+    src.forEach(r=>{
+      var length = r.length
+      if(r.substr(0,1)==="h")
+      var imgUrl = r.substr(11,length)
+      else
+      var imgUrl = r.substr(9,length)
+      imgArr += imgUrl+","
+    })
+    console.log("imgArr",imgArr)
+    if(texts===""){
+      wx.hideLoading();
       wx.showToast({
         title: '输入框不能为空!',
         icon: 'none',
@@ -112,79 +98,22 @@ Page({
       }) 
       return
     }
-    
-    db.collection('userShare').add({
-      data:{
-      username: that.data.nickName,
-      avatar: that.data.avatarUrl,
-      text:that.data.texts,
-      imglist:that.data.src,
-      type:that.data.type,
-      looked:0,
-      isfav:false,
-      favnum:0,
-      create_time:that.data.create_time
-      },
-      success(res){
-        console.log(res);
-        wx.hideLoading()
+    for (var i = 0;i<src.length;i++){
+      request.uploadFile(src[i],res=>{
+        console.log(res)
+      })
+    }
+    request.insertShare(avatar, texts,nickName, wx.getStorageSync('openid'), imgArr,res=>{
+      console.log(res)
+      if(res.data.msg === "成功"){
+        wx.hideLoading();
         wx.navigateBack()
-      },
-      fail(res){
+      }else{
+        wx.hideLoading();
         wx.showToast({
-          title: '上传失败，请稍后再试',
+          title: '发表失败，请稍后再试',
         })
       }
-    })
-  },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  })
   }
 })

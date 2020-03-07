@@ -1,0 +1,6 @@
+<view class="above-all">
+  <image style='margin-top:300rpx;width:50%;height:240rpx;' src='../../images/timg.gif'></image>
+  <text style='display:block;margin-top:50rpx;color:#787878'>微信授权后,可使用更多功能哦</text>
+  <button type='primary' style="margin:0 20rpx;margin-top:40rpx" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+  <button data-type="{{type}}" bindtap='naviback'  style="margin:0 20rpx;margin-top:20rpx">返回首页</button>
+</view>

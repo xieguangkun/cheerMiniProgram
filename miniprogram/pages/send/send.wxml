@@ -1,19 +1,13 @@
 <!--miniprogram/pages/send/send.wxml-->
 <view class="send-all">
 <form >
-  <view class="send-title">
-    <input bindinput='setTitle' type="text" name="title" placeholder='输入标题' ></input>
-  </view>
-
-  <view class="line"></view>
-
   <view class="send-text">
-    <textarea bindinput='setText' name="texts" placeholder='输入内容'></textarea>
+    <textarea bindinput='setText' name="texts" placeholder='写点什么吧...'></textarea>
   </view>
   <view class="line"></view>
   <view class="send-imgs">
-    <image bindtap='gotoShow' src="../../images/icon_camera.png"></image>
-    <image src="../../images/icon_launch_page.png"></image>
+    <image bindtap='gotoShow' src="../../images/camera.png"></image>
+    <image src="../../images/album.png"></image>
   </view>
   <view class="show-imgs">
   <image  mode="aspectFitf" wx:for="{{src}}" src="{{item}}"></image>

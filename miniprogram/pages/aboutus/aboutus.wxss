@@ -1,0 +1,12 @@
+/* miniprogram/pages/aboutus/aboutus.wxss */
+.model{
+   position: absolute;
+ 
+  width: 100%;
+ 
+  top: 0;
+ 
+  bottom: 0;
+ 
+ background:#99CC99;
+}

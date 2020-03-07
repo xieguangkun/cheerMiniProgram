@@ -1,0 +1,5 @@
+<!--miniprogram/pages/likeandfav/likeandfav.wxml-->
+<view style="width:100%;text-align:center">
+  <image src='../../images/sun.gif' style="margin-top:200rpx"></image>
+  <text style="display:block;margin-top:20rpx;color:gray">暂时还未收到消息哦</text>
+</view>

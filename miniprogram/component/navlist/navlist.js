@@ -11,6 +11,10 @@ Component({
     navtext:{
       type:String,
       value:"无"
+    },
+    page:{
+      type:String,
+      value:""
     }
   },
 
@@ -25,6 +29,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    navigator:function(){
+      wx.navigateTo({
+        url: this.properties.page,
+      })
+    }
   }
 })

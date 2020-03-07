@@ -1,0 +1,21 @@
+<!--miniprogram/pages/send/send.wxml-->
+<view class="send-all">
+<form>
+  <view class="send-text">
+    <textarea bindinput='setText' name="texts" placeholder='快来分享你的心情吧!'></textarea>
+  </view>
+
+  <view class="line"></view>
+
+  <view class="send-imgs">
+    <image bindtap='gotoShow' src="../../images/camera.png"></image>
+    <image src="../../images/album.png"></image>
+  </view>
+  <view class="show-imgs">
+  <image  mode="aspectFitf" wx:for="{{src}}" src="{{item}}"></image>
+  </view>
+  <view class="submit-br">
+    <button type='primary' form-type='submit' bindtap='searchBox'>提交</button>
+  </view>
+  </form>
+</view>

@@ -1,0 +1,7 @@
+<!--miniprogram/pages/likeandfav/likeandfav.wxml-->
+<view class="container">
+<view class="model" style="text-align:center">
+  <image src='../../images/cheerhole.jpg' style="width:100%;" mode='widthFix'></image>
+    <view style="display:block;margin-top:100rpx;color:gray;border-radius:20rpx;padding:15% 0;border:1rpx solid #000000;width:auto">此处输入简介什么的</view>
+</view>
+</view>

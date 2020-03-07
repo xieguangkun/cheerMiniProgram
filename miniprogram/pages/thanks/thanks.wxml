@@ -1,0 +1,6 @@
+<!--miniprogram/pages/thanks/thanks.wxml-->
+<view style="width:100%;height:auto;text-align:center">
+  <image src='../../images/timg.gif' style="margin-top:100rpx"></image>
+  <text style="display:block;margin-top:30rpx">我们已收到您的信息，感谢您的反馈!</text>
+  <button type='primary'style="margin:0 10%;margin-top:50rpx" bindtap='navigator'>返回首页</button>
+</view>

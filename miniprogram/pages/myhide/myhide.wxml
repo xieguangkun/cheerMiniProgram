@@ -1,0 +1,14 @@
+<!--index.wxml-->
+<view wx:if="{{canIUse}}">
+  <scroll-view scroll-y="{{isScroll}}">
+    <view wx:for="{{products}}"> 
+      <shareItem bind:deleteid="deleteid" username="{{item.hide.userName}}" favnum="{{item.hide.likeNum}}" avatar="{{item.hide.avatar}}" imglist="{{item.hide.imgList}}" isFav="{{item.isFav}}" looked="{{item.hide.looked}}" text="{{item.hide.text}}" date="{{item.date}}" _id="{{item.hide.id}}" commNum="{{item.hide.commNum}}" sendtype="1" flag="{{item.flag}}" candele="{{item.candele}}"></shareItem> 
+    </view> 
+  </scroll-view>
+</view>
+
+<view class="all" wx:else>
+<button type='warn' open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo"  class='getInfo'>
+  获取信息
+</button>
+</view>

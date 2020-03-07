@@ -4,32 +4,32 @@
   <view class="detail-top"> 
     <image src="{{avatar}}"></image> 
     <view class="detail-top-show"> 
-      <view class="username">{{username}}</view> 
+      <view class="username" style="color:#FF6666">{{username}}</view> 
       <view class="userdate">{{date}}</view> 
     </view> 
   </view> 
  
   <view class="detail-text">{{text}}</view> 
   <view class="detail-photos" wx:for='{{imglist}}'> 
-    <image src="{{item}}" bindtap='imgYu'></image> 
+    <image src="{{item.imgUrl}}" bindtap='imgYu' mode="aspectFill" data-src='{{item.imgUrl}}'></image> 
   </view> 
   <view class="detail-imp"> 
-    <view class="detail-look">浏览837次</view> 
+    <view class="detail-look">浏览次数{{looked}}次</view> 
     <view class="detail-intr"> 
-      <image bindtap='change' wx:if="{{isFav}}" src ="../../images/fav_select.png"></image> 
+      <image bindtap='change' wx:if="{{isFav==1?true:false}}" src ="../../images/fav_select.png"></image> 
       <image bindtap='change' wx:else  src = "../../images/fav.png"></image> 
        
-      <image src = "../../images/star.png" bindtap='showInputBox'></image> 
+      <image src = "../../images/comment.png" bindtap='showInputBox'></image> 
     </view> 
   </view> 
   <view class="line"></view> 
   <view class="loving-items"> 
     <image src="../../images/love.png"></image> 
-    <text>{{favnum}}人觉得很赞</text> 
+    <view style="color:#FF6666"><span style="color:black"> {{favnum}}</span>人觉得很赞</view> 
   </view> 
   <view class="detail-divide"></view> 
   <view class="detail-comm" wx:for="{{comments}}" > 
-    <commItem  data-id='{{item._id}}' data-open='{{item._openid}}' bindlongpress='deleter' username="{{item.commuser}}" useravartal="{{item.commavatar}}" _id="{{item._id}}" comment="{{item.comment}}" createtime="{{item.interval}}" ></commItem> 
+    <commItem  data-id='{{item.id}}' data-open='{{item.comuserId}}' bindlongpress='deleter' username="{{item.commName}}" useravartal="{{item.commAvatar}}" _id="{{item.id}}" comment="{{item.comment}}" createtime="{{item.date}}" ></commItem> 
   </view> 
  
   <!-- 评论框 --> 

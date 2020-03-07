@@ -16,7 +16,7 @@
  
 .detail-top{
  
-  padding: 20rpx; 
+  padding:20rpx; 
  
   width: 100%;
  
@@ -58,8 +58,6 @@
  
   font-size: 24rpx;
  
-  color: #1E90FF;
- 
 }
  
 
@@ -85,6 +83,8 @@
 .detail-text{
  
   margin-left:30rpx;
+
+  margin-bottom: 20rpx;
  
   font-size: 24rpx;
  
@@ -214,11 +214,10 @@ background-color: gray;
  
 
  
-.loving-items text{
+.loving-items view{
  
   font-size: 24rpx;
- 
-  color: #6495ED;
+
  
 }
  
@@ -289,13 +288,16 @@ background-color: gray;
   right: 0;
  
   z-index: 101;
+
+  background: #FFFFCC;
  
 }
  
 
  
 .textarea {
- 
+  border-radius: 20rpx;
+
   background-color: #fff;
  
   width: 100%;
@@ -313,12 +315,17 @@ background-color: gray;
 
  
 .send {
+  background: #FF6666;
+
+  border-radius:20rpx;  
+
+  padding: 10rpx;
  
   font-size: 14px;
  
-  margin-top: 5rpx;
+  margin-top: 10rpx;
  
-  color: #09bb07;
+  color: white;
  
   float: right;
  

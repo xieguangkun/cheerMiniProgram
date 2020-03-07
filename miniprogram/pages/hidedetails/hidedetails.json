@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "commItem": "/component/commItem/commItem",
+    "topbar": "/component/topbar/topbar"
+  }
+}

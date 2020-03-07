@@ -1,15 +1,29 @@
 /* miniprogram/component/shareItem/shareItem.wxss */
 .share-item{
-  width: 100%;
+  width: auto;
   height: auto;
   background-color: white;
-  padding: 20rpx 0;
-  margin: 30rpx 0;
+  padding: 5rpx 0;
+  border:1rpx solid #484848;
+  margin: 30rpx;
+  margin-top: 40rpx; 
+  border-radius: 20rpx;
+  background: #FFFFCC;
+  position: relative;
+}
+
+.share-main{
+  width: auto;
+  border-radius: 10rpx;
+  background: white;
+  z-index: 2;
+  margin: 30rpx;
+  padding: 20rpx;
 }
 
 .share-top{
   padding: 20rpx; 
-  width: 100%;
+ 
   height: 60rpx;
   display: flex;
   justify-content: flex-start;
@@ -29,7 +43,7 @@
 .share-top-show .username{
   margin-left:10rpx; 
   font-size: 24rpx;
-  color: #1E90FF;
+  color: #FF9999;
 }
 
 .share-top-show .userdate{
@@ -53,7 +67,7 @@
 
 .share-photos image{
   width: 31.5%;
-  height: 220rpx;
+  height: 200rpx;
   margin:5rpx;
 }
 
@@ -68,7 +82,7 @@ justify-content: space-between;
   font-size: 24rpx;
   width: auto;
   height: 30rpx;
-  color: #D3D3D3;
+  color: #FF9999;
   }
 
 .share-imp .share-intr{
@@ -91,13 +105,19 @@ background-color: gray;
 }
 
 .love-items{
-  width: 100%;
+  width: auto;
   margin-top:10rpx; 
   height: auto;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-between;
+  align-items:baseline;
   padding:0 25rpx;
+}
+
+.love-left{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .love-items image{
@@ -106,9 +126,14 @@ background-color: gray;
   margin:0 5rpx;
 }
 
-.love-items text{
+.love-items view{
   font-size: 24rpx;
-  color: #6495ED;
+  color: #FF9999;
+}
+
+.love-items .favbutton{
+  width: 26rpx;
+  height: 26rpx;
 }
 
 .comments{

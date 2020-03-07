@@ -2,25 +2,44 @@
   "pages": [
     "pages/index/index",
     "pages/mine/mine",
+    "pages/hide/hide",
     "pages/send/send",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/sendHide/sendHide",
+    "pages/hidedetails/hidedetails",
+    "pages/authorization/authorization",
+    "pages/myshare/myshare",
+    "pages/myhide/myhide",
+    "pages/likeandfav/likeandfav",
+    "pages/sendform/sendform",
+    "pages/aboutus/aboutus",
+    "pages/thanks/thanks",
+    "pages/web/web"
   ],
   "window": {
+    "navigationStyle": "default",
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "倾尔树洞",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
+        "text": "杂话墙",
         "iconPath": "images/tabbar1.png",
         "selectedIconPath": "images/tabbar1_select.png",
-        "selectedColor": "#00FF00",
+        "selectedColor": "#99CC99",
+        "color": "#000000"
+      },
+      {
+        "pagePath": "pages/hide/hide",
+        "text": "匿名墙",
+        "iconPath": "images/message.png",
+        "selectedIconPath": "images/message_select.png",
+        "selectedColor": "#99CC99",
         "color": "#000000"
       },
       {
@@ -28,7 +47,7 @@
         "text": "我的",
         "iconPath": "images/tabbar2.png",
         "selectedIconPath": "images/tabbar2_select.png",
-        "selectedColor": "#00FF00",
+        "selectedColor": "#99CC99",
         "color": "#000000"
       }
     ]

@@ -1,0 +1,4 @@
+<!--miniprogram/pages/web/web.wxml-->
+<web-view src="{{url}}" style='width:100%;height:auto;'>
+
+</web-view>

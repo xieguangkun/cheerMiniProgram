@@ -1,0 +1,22 @@
+<view>
+  <i-tabs current="{{ current }}" color="#663366" bindchange="handleChange">
+        <i-tab key="happy" title="开心"></i-tab>
+        <i-tab key="sad" title="难过"></i-tab>
+        <i-tab key="sang" title="丧了"></i-tab>
+        <i-tab key="surprise" title="惊讶"></i-tab>
+  </i-tabs> 
+  <scroll-view>
+    <view class="top-bar"> 
+    <view class="send-item" wx:for="{{showlist}}"> 
+      <navigator url='../sendHide/sendHide?type={{item.type}}'> 
+        <image src='{{item.imgurl}}'></image> 
+        <text>{{item.text}}</text> 
+      </navigator> 
+    </view> 
+    </view>
+     
+    <view wx:for="{{products}}"> 
+      <shareItem bind:deleteid="deleteid" username="{{item.hide.userName}}" favnum="{{item.hide.likeNum}}" avatar="{{item.hide.avatar}}" imglist="{{item.hide.imgList}}" isFav="{{item.isFav}}" looked="{{item.hide.looked}}" text="{{item.hide.text}}" date="{{item.date}}" _id="{{item.hide.id}}" commNum="{{item.hide.commNum}}" sendtype="1" flag="{{item.flag}}" candele="{{item.candele}}"></shareItem> 
+    </view> 
+  </scroll-view> 
+</view> 

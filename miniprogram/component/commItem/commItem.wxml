@@ -2,9 +2,9 @@
 <view class="comm-top"> 
   <image src="{{useravartal}}"></image> 
   <view class="comm-top-show"> 
-    <view class="comm-username">{{username}}</view> 
-    <view class="comm-userdate">{{createtime}}</view> 
+    <view class="comm-username" style="color:#FF6666">{{username}}</view>  
     <view class="comment">{{comment}}</view> 
   </view> 
-</view> 
+</view>
+<view class="comm-userdate">{{createtime}}</view> 
 <view class="comm-line"></view> 

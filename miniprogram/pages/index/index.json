@@ -1,6 +1,9 @@
+
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "shareItem":"/component/shareItem/shareItem"
+    "shareItem":"/component/shareItem/shareItem",
+    "topbar": "/component/topbar/topbar"
   }
   
 }

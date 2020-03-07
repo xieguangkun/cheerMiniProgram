@@ -1,16 +1,21 @@
 <!--index.wxml-->
-<view class="container" wx:if="{{canIUse}}">
+<view wx:if="{{canIUse}}">
+  <view class="send-item" bindtap='navigate'>
+  <image src="../../images/books.png"></image>
+  </view>
   <scroll-view scroll-y="{{isScroll}}">
     <view class="top-bar">
-    <view class="send-item" wx:for="{{showlist}}">
-      <navigator url='../send/send?type={{item.type}}'>
-        <image src='{{item.imgurl}}'></image>
-        <text>{{item.text}}</text>
-      </navigator>
-    </view>
+      <swiper style='width:100%' autoplay="true" indicator-dots="true">
+        <block class="swiper" wx:for="{{showlist}}">
+    <swiper-item>
+      <text style='color:white;position:absolute;bottom:10rpx;right:20rpx;z-index:100;font-size:30rpx'>{{item.word}}</text>
+      <image src="{{item.imgurl}}" data-url="{{item.url}}" bindtap='gotofficalcount' class="slide-image" mode="widthFix" />
+    </swiper-item>
+        </block>
+      </swiper>
     </view>
     <view wx:for="{{products}}">
-      <shareItem id="{{item.shortid}}" username="{{item.username}}" favnum="{{item.favnum}}" avatar="{{item.avatar}}" imglist="{{item.imglist}}"  looked="{{item.looked}}" text="{{item.text}}" date="{{item.interval}}" _id="{{item._id}}" commuser="{{nickName}}" commavartal="{{avatarUrl}}" arr="{{arr}}" ></shareItem>
+      <shareItem bind:deleteid="deleteid"  username="{{item.share.userName}}" favnum="{{item.share.likeNum}}" avatar="{{item.share.avatar}}" imglist="{{item.share.imgList}}" isFav="{{item.isFav}}" looked="{{item.share.looked}}" text="{{item.share.text}}" date="{{item.date}}" _id="{{item.share.id}}" commuser="{{nickName}}" commavartal="{{avatarUrl}}" commNum="{{item.share.commNum}}" flag="{{item.flag}}" sendtype="0" candele="{{item.candele}}" ></shareItem>
     </view>
      
       

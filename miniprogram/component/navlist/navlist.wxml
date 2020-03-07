@@ -1,5 +1,5 @@
 <!--component/navlist/navlist.wxml-->
-<view class="navlist-all">
+<view class="navlist-all" bindtap='navigator'>
   <view class="navlist-group">
     <image src='{{iconurl}}'></image>
     <text>{{navtext}}</text>

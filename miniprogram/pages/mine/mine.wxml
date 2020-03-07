@@ -1,19 +1,24 @@
 <!--miniprogram/pages/mine/mine.wxml-->
-<view class="page">
+<view>
 <scroll-view>
+<view class="user-top">
   <view class="user-info">
-    <image src="{{avatarUrl}}"></image>
-    <text>{{nickName}}</text>
+    <image src="{{avatarUrl ===''?'../../images/unlogin.jpg':avatarUrl}}"></image>
+    <text style='color:white'>{{nickName===''?'请先授权':nickName}}</text>
   </view>
+  <button wx:if="{{isHide}}" style='height:60rpx;display:flex;align-items:center;margin-top:50rpx;font-size: 26rpx;margin-right:50rpx'  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权信息</button>
+</view>
   <view class="nav-center">
     <navlist wx:for="{{naglist}}"
     iconurl="{{item.imgurl}}"
-    navtext="{{item.text}}"></navlist>
+    navtext="{{item.text}}" page="{{item.page}}"></navlist>
   </view>
   <view class="nav-bottom">
     <navlist wx:for="{{nag2list}}"
     iconurl="{{item.imgurl}}"
-    navtext="{{item.text}}"></navlist>
+    navtext="{{item.text}}" page="{{item.page}}"></navlist>
   </view>
+
+  <view class="stdio-text">@cheerhole-2019</view>
 </scroll-view>
 </view>

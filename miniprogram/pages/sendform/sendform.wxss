@@ -1,0 +1,52 @@
+/* miniprogram/pages/send/send.wxss */
+.send-all{
+  position: absolute;
+  text-align: center;
+  margin: 0 5rpx;
+  top:0;
+  width: 100%;
+  bottom: 0;
+}
+
+.send-title{
+  margin-top:50rpx; 
+  padding: 0 25rpx;
+  height: 100rpx;
+}
+
+.send-title input{
+  padding: 3rpx 0;
+  background: #F0F0F0;
+  border:solid 1rpx; 
+}
+
+.send-text{
+  margin-top:50rpx;
+  padding: 0 25rpx;
+  height: 400rpx;
+}
+
+.send-text textarea{
+  background: #F0F0F0;
+  border:solid 1rpx;
+  border-radius:50rpx; 
+  width: 100%;
+  height: 90%;
+}
+
+.line{
+margin: 10rpx;
+height: 3rpx;
+background-color: black;
+}
+
+.submit-br{
+margin-top: 50rpx;
+
+}
+
+.submit-br button{
+  margin: 0 20rpx;
+  border-radius: 30rpx;
+  background: #99CC99; 
+}

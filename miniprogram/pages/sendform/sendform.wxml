@@ -1,0 +1,13 @@
+<!--miniprogram/pages/send/send.wxml-->
+<view class="send-all">
+<form >
+  <view class="send-text">
+    <textarea bindinput='setText' name="texts" placeholder='您想要说些什么吗..'></textarea>
+  </view>
+  <view class="line"></view>
+  <view class="submit-br">
+    <button type='primary' form-type='submit' bindtap='searchBox'>提交</button>
+  </view>
+  </form>
+</view>
+

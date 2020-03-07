@@ -1,0 +1,6 @@
+/* miniprogram/pages/authorization/authorization.wxss */
+.above-all{
+  text-align: center;
+  width: 100%;
+  height: auto;
+}
